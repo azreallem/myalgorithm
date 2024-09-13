@@ -16,6 +16,7 @@
 
 - 总测试次数(times)
 - 样本总容量(total)
+- 样本百分比(obv_precent)
 
 ### 输出
 
@@ -26,4 +27,30 @@
 - best_prob: best_times概率。
 - better_prob: better_times概率。
 
+## 结论
 
+1. 可以选择37%观察样本;
+```
+please input test times: 10000
+please input Total Sample Qty: 10000
+please input obversive precent(for example:0.368): 0.37
+-------------------------------------------
+sel_average_num: 75.18
+times: 10000, best_times: 3495, better_times: 7499
+best_prob:   34.95%
+better_prob: 74.99%
+```
+
+2. 可以选择10%观察样本；
+```
+please input test times: 10000
+please input Total Sample Qty: 10000
+please input obversive precent(for example:0.368): 0.1
+-------------------------------------------
+sel_average_num: 92.58
+times: 10000, best_times: 2885, better_times: 9270
+best_prob:   28.85%
+better_prob: 92.70%
+```
+
+3. 虽然选择37%观察样本得到最优解的概率最大: 34%；但是选择10%观察样本得到的数学期望值最大: 90（满分100）。

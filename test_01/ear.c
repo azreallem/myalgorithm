@@ -3,6 +3,8 @@
 #include <stdbool.h>
 #include <time.h>
 
+#define LOGS 0
+
 #define MIN_NUMBER -1.00
 
 int main()
@@ -15,11 +17,14 @@ int main()
 	float better_prob =  0.00;
 	int total = 0;
 	float sel_average_num = 0.00;
+	float obv_precent = 0.00;
 
 	printf("please input test times: ");
 	scanf("%d", &times);
 	printf("please input Total Sample Qty: ");
 	scanf("%d", &total);
+	printf("please input obversive precent(for example:0.368): ");
+	scanf("%f", &obv_precent);
 
 	for (int t = 0; t < times; t++) {
 		float *randomNumber = (float *)malloc(total * sizeof(float));
@@ -27,20 +32,24 @@ int main()
 		float real_max_num = MIN_NUMBER;
 		float ob_max_num = MIN_NUMBER;
 		float average_num = 0;
-		float pre_ob = total * 0.37;
+		float pre_ob = total * obv_precent;
 
 		for (int i = 0; i < total; i++) {
 			randomNumber[i] = (float)(rand() % 10000) / 100; //0.00 ~ 99.99
 			average_num += randomNumber[i];
 			if (randomNumber[i] > real_max_num)
 				real_max_num = randomNumber[i];
+#if LOGS
 			printf("%.2f\t", randomNumber[i]);
 			if (i % 10 == 9)
 				printf("\n");
+#endif
 		}
 		average_num /= total;
+#if LOGS
 		printf("average_num: %.2f\n", average_num);
 		printf("real_max_num: %.2f\n", real_max_num);
+#endif
 
 		for (int i = 0; i < pre_ob; i++)
 			if (randomNumber[i] > ob_max_num)
@@ -54,7 +63,9 @@ int main()
 				sel_max_num = randomNumber[i];
 		}
 		sel_average_num += sel_max_num;
+#if LOGS
 		printf("sel_max_num: %.2f\n", sel_max_num);
+#endif
 
 		if (sel_max_num == real_max_num)
 			best_times++;
